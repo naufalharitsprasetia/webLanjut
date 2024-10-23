@@ -2,22 +2,22 @@
 
 # Ini RepositoryKu untuk Mata Kuliah Pemrogramman Web Lanjut
 
-My Name : Naufal Harits Prasetia
-NIM : 432022611051
-Semester : 6 (enam)
-Mata Kuliah : Pemrogramman Web Lanjut
-Dosen Pengampu : Oddy Virgantara Putra, S.Kom., M.T
+- My Name : Naufal Harits Prasetia
+- NIM : 432022611051
+- Semester : 6 (enam)
+- Mata Kuliah : Pemrogramman Web Lanjut
+- Dosen Pengampu : Oddy Virgantara Putra, S.Kom., M.T
 
 ## Tugas 1 :
 
-- [Klik Disini](tugas1/README.md)
+[Klik Disini](tugas1/)
 
 - Tugas Mandiri 1: Buat program sederhana dengan PHP untuk mengoleksi data seperti pendaftaran peserta atau mahasiswa dan menampilkan secara dinamis
 - Kuis 1: 100 :v
 
 ## Tugas 2
 
-- [Klik Disini](tugas2/README.md)
+[Klik Disini](tugas2/)
 
 Detail Tugas :
 
