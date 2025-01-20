@@ -76,5 +76,5 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 - **Pengujian**: [Nama Anggota 4]
 
 ## Lisensi
-Proyek ini dilisensikan di bawah [Lisensi MIT](LICENSE).
+Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).
 
