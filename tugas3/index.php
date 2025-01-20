@@ -1,39 +1,43 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Secure Login</title>
-    <script src="https://cdn.rawgit.com/travist/jsencrypt/master/bin/jsencrypt.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
     <script>
     async function encryptPassword(event) {
         event.preventDefault();
+
+        const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // Ambil public key
-        const publicKey = await fetch('./keys/public_key.pem').then(res => res.text());
+        const publicKeyPEM = await fetch('./keys/public_key.pem').then(res => res.text());
+        const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM);
 
-        // Enkripsi password
-        const encrypt = new JSEncrypt();
-        encrypt.setPublicKey(publicKey);
-        const encryptedPassword = encrypt.encrypt(password);
+        const encryptedPassword = forge.util.encode64(publicKey.encrypt(password));
 
-        // Kirim data terenkripsi
-        document.getElementById('encryptedPassword').value = encryptedPassword;
-        document.getElementById('loginForm').submit();
+
+        // Submit encrypted password
+        const form = event.target;
+        const encryptedField = document.createElement('input');
+        encryptedField.type = 'hidden';
+        encryptedField.name = 'encryptedPassword';
+        encryptedField.value = encryptedPassword;
+
+        form.appendChild(encryptedField);
+        form.submit();
     }
     </script>
 </head>
 
 <body>
-    <form id="loginForm" action="login.php" method="POST" onsubmit="encryptPassword(event)">
+    <form onsubmit="encryptPassword(event)" method="POST" action="login.php">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-
+        <input type="text" id="username" name="username" required>
         <label for="password">Password:</label>
-        <input type="password" id="password" required><br><br>
-
-        <input type="hidden" id="encryptedPassword" name="encryptedPassword">
+        <input type="password" id="password" required>
         <button type="submit">Login</button>
     </form>
 </body>
