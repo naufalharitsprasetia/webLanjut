@@ -34,12 +34,18 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 ## Struktur Proyek
 ```plaintext
 .
-├── generate.php        # File untuk menghasilkan kunci RSA
-├── index.php           # Form login
-├── keys/               # Folder untuk file kunci RSA
-├── vendor/             # Folder untuk dependensi
-├── login.php           # File untuk memproses login
-├── README.md           # Dokumentasi proyek
+├── generate.php        # Script untuk menghasilkan kunci RSA (public & private key)
+├── index.php           # Halaman utama untuk form login
+├── keys/               # Folder untuk menyimpan file kunci RSA
+│   ├── private.key     # Kunci privat RSA
+│   └── public.key      # Kunci publik RSA
+├── vendor/             # Folder untuk dependensi Composer (otomatis dibuat oleh Composer)
+├── composer.json       # File konfigurasi Composer untuk dependensi PHP
+├── composer.lock       # File lock Composer untuk versi dependensi
+├── login.php           # Script untuk memproses login
+├── LICENSE             # File lisensi proyek (MIT License)
+├── TESTING.md          # Dokumentasi skenario dan langkah-langkah pengujian
+├── README.md           # Dokumentasi proyek utama, termasuk cara instalasi dan penggunaan
 ```
 
 ## Cara Kerja
@@ -67,13 +73,13 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 
 ## Dokumentasi
 - Penjelasan lengkap tersedia di file `README.md` ini.
-- Skenario Testing ada di `TESTING.md` ini.
+- Skenario Testing ada di [TESTING.md](testing.md) ini.
 - Laporan tambahan dan skenario pengujian disertakan dalam folder `docs/` jika diperlukan.
 
 ## Kontribusi Tim
-- **Backend Developer**: [Nama Anggota 1, Nama Anggota 2]
-- **Dokumentasi**: [Nama Anggota 3]
-- **Pengujian**: [Nama Anggota 4]
+- **Backend Developer**: NAUFAL HARITS PRASETIA
+- **Dokumentasi**: NAUFAL HARITS PRASETIA
+- **Pengujian**: NAUFAL HARITS PRASETIA
 
 ## Lisensi
 Proyek ini dilisensikan di bawah [Lisensi MIT](LICENSE).
