@@ -33,7 +33,7 @@ try {
     $key = $key->withPadding(RSA::ENCRYPTION_PKCS1);
     $decryptedPassword = $key->decrypt(base64_decode($encryptedPassword));
 
-    echo $decryptedPassword;
+    // echo $decryptedPassword;
     if ($decryptedPassword === false) {
         die("Gagal mendekripsi password. Pastikan formatnya benar.");
     }
