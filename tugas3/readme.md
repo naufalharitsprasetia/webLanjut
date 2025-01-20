@@ -82,5 +82,5 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 - **Pengujian**: NAUFAL HARITS PRASETIA
 
 ## Lisensi
-Proyek ini dilisensikan di bawah [Lisensi MIT](LICENSE).
+Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).
 
