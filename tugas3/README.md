@@ -75,7 +75,7 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 
 ## Dokumentasi
 - Penjelasan lengkap tersedia di file `README.md` ini.
-- Skenario Testing ada di [TESTING.md](testing.md) ini.
+- Skenario Testing ada di [TESTING.md](TESTING.md) ini.
 - Laporan tambahan dan skenario pengujian disertakan dalam folder `docs/` jika diperlukan.
 
 ## Kontribusi Tim
