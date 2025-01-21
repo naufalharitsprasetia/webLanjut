@@ -1,6 +1,6 @@
 # Keamanan Form Login dengan Enkripsi RSA dan PHP
 
-Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkripsi RSA. Data login akan dienkripsi menggunakan kunci publik dan didekripsi menggunakan kunci privat. Proyek ini juga dilengkapi dengan validasi input dan sanitasi untuk mencegah serangan seperti SQL Injection dan XSS.
+Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkripsi RSA dengan bahasa PHP. Data login akan dienkripsi menggunakan kunci publik dan didekripsi menggunakan kunci privat. Proyek ini juga dilengkapi dengan validasi input dan sanitasi untuk mencegah serangan seperti SQL Injection dan XSS.
 
 ## Fitur
 - **Enkripsi RSA**: Data login dienkripsi menggunakan kunci publik dan didekripsi menggunakan kunci privat.

@@ -1,15 +1,25 @@
 # Skenario Testing
 
-## Test fitur generate key
-- buka localhost, arahkan ke direktori dan buka file generate.php , misalkan `http://localhost/weblanjut/tugas3/generate.php`
+## 1. Test Fitur Generate Key
+1. Buka **localhost** melalui browser.
+2. Arahkan ke direktori tempat file `generate.php` berada, misalnya:  
+   `http://localhost/weblanjut/tugas3/generate.php`.
+3. Pastikan halaman dapat diakses tanpa error dan kunci berhasil dihasilkan.
 
-## Test Login Dengan Kredensial yang benar
-- buka localhost, masukkan username : admin, password : 12345
-- jika login berhasil maka program berjalan lancar
-- jika gagal berarti Test ini tidak lulus
+## 2. Test Login dengan Kredensial yang Benar
+1. Buka **localhost** melalui browser.
+2. Masukkan kredensial berikut pada halaman login:  
+   - **Username:** `admin`  
+   - **Password:** `12345`
+3. Verifikasi hasil:
+   - Jika login berhasil, program berjalan dengan lancar.
+   - Jika login gagal, maka test ini **tidak lulus**.
 
-## Test Login Dengan Kredensial yang salah
-
-- buka localhost :
-- coba masukkan username selain "admin" dan password selain "12345", jika login Salah berarti pemogramman berjalan dengan lancar
-- jika login berhasil maka program nge Bug
+## 3. Test Login dengan Kredensial yang Salah
+1. Buka **localhost** melalui browser.
+2. Coba login dengan kredensial **yang salah**, misalnya:
+   - **Username:** selain `admin`  
+   - **Password:** selain `12345`
+3. Verifikasi hasil:
+   - Jika login ditolak dengan pesan "Login Salah," berarti program berjalan dengan baik.
+   - Jika login berhasil, berarti terdapat **bug** dalam program.
