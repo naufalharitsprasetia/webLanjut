@@ -18,7 +18,6 @@
 
         const encryptedPassword = forge.util.encode64(publicKey.encrypt(password));
 
-
         // Submit encrypted password
         const form = event.target;
         const encryptedField = document.createElement('input');

@@ -11,7 +11,8 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 
 ## Teknologi yang Digunakan
 - **Bahasa Pemrograman**: PHP
-- **Library**: [phpseclib3](https://github.com/phpseclib/phpseclib)
+- **Library**: [phpseclib3](https://github.com/phpseclib/phpseclib) 
+- **Library**: Node-forge (v1.3.1): Library JavaScript untuk enkripsi RSA di sisi klien. [cdn](https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js) 
 - **Server Lokal**: Laragon
 
 ## Cara Instalasi

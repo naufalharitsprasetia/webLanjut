@@ -20,10 +20,11 @@ if ($key instanceof \phpseclib3\Crypt\Common\PublicKey) {
 } elseif ($key instanceof \phpseclib3\Crypt\Common\PrivateKey) {
     // echo "Ini adalah kunci privat.\n";
 }
-// Validate input
+// Sanitasi input
 $username = htmlspecialchars($_POST['username'] ?? '');
-$encryptedPassword = $_POST['encryptedPassword'] ?? '';
 
+// Validasi input
+$encryptedPassword = $_POST['encryptedPassword'] ?? '';
 if (empty($username) || empty($encryptedPassword)) {
     die("Username atau password tidak boleh kosong.");
 }
