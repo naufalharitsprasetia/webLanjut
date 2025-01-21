@@ -10,9 +10,9 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 - **Pengujian Fungsionalitas**: Uji coba login berhasil dan gagal.
 
 ## Teknologi yang Digunakan
-- PHP
-- Library phpseclib3
-- Laragon (Local Server)
+- **Bahasa Pemrograman**: PHP
+- **Library**: [phpseclib3](https://github.com/phpseclib/phpseclib)
+- **Server Lokal**: Laragon
 
 ## Cara Instalasi
 1. **Clone Repository**
@@ -23,6 +23,7 @@ Proyek ini bertujuan untuk membuat form login yang aman menggunakan metode enkri
 2. **Pasang Dependensi (phpseclib)**
    - Install Composer jika belum terpasang di sistem Anda.
    - Jalankan perintah berikut untuk memasang library yang diperlukan:
+
    ```bash
    composer require phpseclib/phpseclib
    ```
