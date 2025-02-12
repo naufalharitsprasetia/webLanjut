@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>OAuth2 Popup Login</title>
+    <script>
+      async function register() {
+        const username = document.getElementById("reg_username").value;
+        const password = document.getElementById("reg_password").value;
+
+        const response = await fetch("http://localhost:5000/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert("Registrasi Berhasil! Silakan Login.");
+        } else {
+          alert("Registrasi Gagal: " + data.error);
+        }
+      }
+
+      async function login() {
+        const username = document.getElementById("login_username").value;
+        const password = document.getElementById("login_password").value;
+
+        const response = await fetch("http://localhost:5000/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert("Login Berhasil! Token: " + data.accessToken);
+        } else {
+          alert("Login Gagal: " + data.error);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Registrasi</h2>
+    <input type="text" id="reg_username" placeholder="Username" />
+    <input type="password" id="reg_password" placeholder="Password" />
+    <button onclick="register()">Daftar</button>
+
+    <h2>Login</h2>
+    <input type="text" id="login_username" placeholder="Username" />
+    <input type="password" id="login_password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+  </body>
+</html>
