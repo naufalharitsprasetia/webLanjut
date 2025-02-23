@@ -34,7 +34,7 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
    - import database **'uasweblanjut.sql'** yang beradad di folder config 
    
 4. **Buat File Konfigurasi .env Buat file .env di root proyek dan isi dengan:**
-   (jika belum ada)
+   (jika belum ada) , (sesuaikan dengan konfigutasi komputer masing2)
    ```env
    DB_HOST=localhost
    DB_USER=root
