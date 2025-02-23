@@ -112,23 +112,59 @@
     </div>
 
     <script>
-      // Event handler untuk Login
+      // Fungsi untuk mencegah spasi dan karakter berbahaya
+      function sanitizeInput(input) {
+        return input.replace(/[^a-zA-Z0-9_]/g, ""); // Hanya huruf, angka, dan underscore
+      }
+
+      // Mencegah spasi saat mengetik
+      function preventSpaces(event) {
+        if (event.key === " ") {
+          event.preventDefault();
+        }
+      }
+
+      // Terapkan ke input username login dan register
+      document
+        .getElementById("loginUsername")
+        .addEventListener("keypress", preventSpaces);
+      document
+        .getElementById("registerUsername")
+        .addEventListener("keypress", preventSpaces);
+
+      // Fungsi untuk menampilkan pesan error jika server mati
+      function showServerError(errorDiv) {
+        errorDiv.textContent =
+          "Server tidak merespons. Pastikan server berjalan.";
+        errorDiv.classList.remove("d-none");
+      }
+
+      // Validasi sebelum submit login
       document
         .getElementById("loginForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const username = document.getElementById("loginUsername").value;
+          let username = document.getElementById("loginUsername").value.trim();
           const password = document.getElementById("loginPassword").value;
           const errorDiv = document.getElementById("loginError");
 
+          username = sanitizeInput(username);
+
+          if (!username) {
+            errorDiv.textContent =
+              "Username tidak valid! Gunakan hanya huruf, angka, dan underscore.";
+            errorDiv.classList.remove("d-none");
+            return;
+          }
+
           try {
-            // Ambil public key dari server
             const pubKeyResponse = await fetch(
               "http://localhost:5000/auth/publicKey"
             );
-            const publicKey = await pubKeyResponse.text();
 
-            // Enkripsi password dengan RSA
+            if (!pubKeyResponse.ok) throw new Error("Server tidak tersedia");
+
+            const publicKey = await pubKeyResponse.text();
             const encrypt = new JSEncrypt();
             encrypt.setPublicKey(publicKey);
             encrypt.setKey(publicKey);
@@ -137,7 +173,7 @@
             const response = await fetch("http://localhost:5000/auth/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ username, password: encryptedPassword }), // Kirim password yang sudah dienkripsi
+              body: JSON.stringify({ username, password: encryptedPassword }),
               credentials: "include",
             });
 
@@ -151,34 +187,54 @@
             }
           } catch (error) {
             console.error("Error saat login:", error);
-            errorDiv.textContent = "Terjadi kesalahan, coba lagi.";
-            errorDiv.classList.remove("d-none");
+            showServerError(errorDiv);
           }
         });
 
-      // Event handler untuk Register
+      // Validasi sebelum submit register
       document
         .getElementById("registerForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-          const username = document.getElementById("registerUsername").value;
+          let username = document
+            .getElementById("registerUsername")
+            .value.trim();
           const password = document.getElementById("registerPassword").value;
           const errorDiv = document.getElementById("registerError");
 
-          const response = await fetch("http://localhost:5000/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-          });
+          username = sanitizeInput(username);
 
-          const data = await response.json();
-          if (response.ok) {
-            alert("Registrasi berhasil! Silakan login.");
-            document.getElementById("registerForm").reset();
-            errorDiv.classList.add("d-none");
-          } else {
-            errorDiv.textContent = data.message;
+          if (!username) {
+            errorDiv.textContent =
+              "Username tidak valid! Gunakan hanya huruf, angka, dan underscore.";
             errorDiv.classList.remove("d-none");
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              "http://localhost:5000/auth/register",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+              }
+            );
+
+            if (!response.ok) throw new Error("Server tidak tersedia");
+
+            const data = await response.json();
+            if (response.ok) {
+              alert("Registrasi berhasil! Silakan login.");
+              document.getElementById("registerForm").reset();
+              errorDiv.classList.add("d-none");
+            } else {
+              errorDiv.textContent = data.message;
+              errorDiv.classList.remove("d-none");
+            }
+          } catch (error) {
+            console.error("Error saat registrasi:", error);
+            showServerError(errorDiv);
           }
         });
 

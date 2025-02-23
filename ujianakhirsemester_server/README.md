@@ -30,10 +30,11 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
    ```
 
 3. **Konfigurasi Database**
-   - Buat database MySQL dengan nama uasweblanjut
-   - import database uasweblanjut.sql di folder config 
+   - Buat database MySQL di phpmyadmin dengan nama **'uasweblanjut'**
+   - import database **'uasweblanjut.sql'** yang beradad di folder config 
    
 4. **Buat File Konfigurasi .env Buat file .env di root proyek dan isi dengan:**
+   (jika belum ada)
    ```env
    DB_HOST=localhost
    DB_USER=root
@@ -44,12 +45,14 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
    ```
 
 5. **Jalankan Server**
+   jalankan perintah berikut di terminal :
    ```bash
    node server.js
    ```
    Aplikasi akan berjalan di http://localhost:5000
 
-6. **Jalankan index.html di folder /public/**
+6. **Jalankan index.html**
+   - buka file index.html di folder /public/ , kemudian :
    - klik kanan, open file with live server / open with browser
 
 ## Struktur Proyek
