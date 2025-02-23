@@ -15,13 +15,13 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 - **Database**: MySQL
 - **Enkripsi**: RSA (jsonwebtoken & crypto)
 - **Frontend**: HTML, CSS, JavaScript (AJAX untuk popup form)
-- **Middleware**: Passport.js (OAuth2 Strategy)
 
 ## **📥 Cara Instalasi**
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/username/oauth2-popup-form.git
-   cd oauth2-popup-form
+   git clone https://github.com/naufalharitsprasetia/webLanjut.git
+   cd webLanjut
+   cd ujianakhirsemester_server
    ```
 
 2. **Pasang Dependensi**
@@ -30,72 +30,47 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
    ```
 
 3. **Konfigurasi Database**
-   - Buat database MySQL dengan nama oauth2_db
-   - Jalankan file database.sql untuk membuat tabel yang dibutuhkan
+   - Buat database MySQL dengan nama uasweblanjut
+   - import database uasweblanjut.sql di folder config 
    
-4. **Buat Kunci RSA**
-    - Jalankan perintah berikut untuk membuat private key dan public key : 
-   ```bash
-   openssl genpkey -algorithm RSA -out private.key -pkeyopt rsa_keygen_bits:2048
-   openssl rsa -in private.key -pubout -out public.key
-   ```
-   - Simpan file private.key dan public.key di folder keys/
-
-5. **Buat File Konfigurasi .env Buat file .env di root proyek dan isi dengan:**
+4. **Buat File Konfigurasi .env Buat file .env di root proyek dan isi dengan:**
    ```env
-   PORT=3000
    DB_HOST=localhost
    DB_USER=root
-   DB_PASS=yourpassword
-   DB_NAME=oauth2_db
-   JWT_ACCESS_EXPIRY=15m
-   JWT_REFRESH_EXPIRY=7d
+   DB_PASS=
+   DB_NAME=uasweblanjut
+   JWT_SECRET=your_jwt_secret
+   PORT=5000
    ```
 
-6. **Jalankan Server**
+5. **Jalankan Server**
    ```bash
-   npm start
+   node server.js
    ```
-   Aplikasi akan berjalan di http://localhost:3000
+   Aplikasi akan berjalan di http://localhost:5000
+
+6. **Jalankan index.html di folder /public/**
+   - klik kanan, open file with live server / open with browser
 
 ## Struktur Proyek
 ```plaintext
 .
 ├── config/
-│   ├── auth.js          # Konfigurasi OAuth2 dan JWT
 │   ├── db.js            # Koneksi ke database MySQL
-│   ├── private.key      # Kunci privat RSA (Jangan dibagikan!)
-│   ├── public.key       # Kunci publik RSA
-├── models/
-│   ├── user.js          # Model pengguna
-│   ├── token.js         # Model token OAuth2
+│   ├── uasweblanjut.sql # database
+├── keys/
+│   ├── private.pem      # Kunci privat RSA (Jangan dibagikan!)
+│   ├── public.pem       # Kunci publik RSA
 ├── routes/
-│   ├── authRoutes.js    # Endpoint autentikasi (login, refresh, logout)
+│   ├── auth.js          # Endpoint autentikasi (login, register, logout)
 ├── public/
-│   ├── index.html       # Halaman login dengan popup form
+│   ├── index.html       # Halaman login & register dengan popup form
+│   ├── dashboard.html   # Halaman dashboard ketika berhasil login
 ├── server.js            # File utama untuk menjalankan server
 ├── .env                 # File konfigurasi lingkungan
 ├── package.json         # Dependensi proyek
 ├── package-lock.json    # Dependensi proyek
 └── README.md            # Dokumentasi proyek
-```
-
-## Skema Database 
-```sql
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE tokens (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    refresh_token TEXT NOT NULL,
-    expires_at TIMESTAMP NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
 ```
 
 ## 🔄 Alur Kerja OAuth2
@@ -107,11 +82,12 @@ CREATE TABLE tokens (
 - Jika access token expired, client menggunakan refresh token untuk mendapatkan access token baru tanpa login ulang
 
 ## 📜 API Endpoint
-| Method |	Endpoint	    | Deskripsi                                          |
-| POST   |	/api/login	    | Login & dapatkan access token + refresh token      |
-| POST   |	/api/refresh    | Dapatkan access token baru dengan refresh token    |
-| POST   |	/api/logout	    | Logout dan hapus refresh token                     |    
-| GET    |	/api/user	    | Ambil data pengguna (dengan access token)          |
+| Method |	Endpoint	       | Deskripsi                                          |
+| POST   |	/auth/login	    | Login & dapatkan access token + refresh token      |
+| POST   |	/auth/register  | Daftar user baru                                   |
+| POST   |	/auth/logout	 | Logout dan hapus refreshtoken                      |   
+| GET    |	/auth/publicKey | mengirim public key ke frontend                    |
+| GET    |	/auth/session   | cek session                                        |
 
 ## ⚠️ Keamanan yang Diterapkan
 - 🔒 RSA-2048: Semua token ditandatangani menggunakan RSA private key
@@ -128,8 +104,8 @@ CREATE TABLE tokens (
 
 ## Kontribusi Tim
 - **Backend Developer**: NAUFAL HARITS PRASETIA
-- **Dokumentasi**: NAUFAL HARITS PRASETIA
-- **Pengujian**: NAUFAL HARITS PRASETIA
+- **Dokumentasi**: ALVIN ARYA PANGESTU
+- **Pengujian**: BOTH
 
 ## Lisensi
 Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).

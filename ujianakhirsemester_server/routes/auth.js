@@ -9,8 +9,8 @@ const path = require("path");
 require("dotenv").config();
 
 // Generate atau load kunci RSA
-const privateKeyPath = path.join(__dirname, "../config/private.pem");
-const publicKeyPath = path.join(__dirname, "../config/public.pem");
+const privateKeyPath = path.join(__dirname, "../keys/private.pem");
+const publicKeyPath = path.join(__dirname, "../keys/public.pem");
 
 let privateKey, publicKey;
 

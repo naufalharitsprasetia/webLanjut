@@ -1,1 +1,3 @@
 node_modules/
+keys/public.pem
+keys/private.pem
