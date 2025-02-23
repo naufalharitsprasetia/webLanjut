@@ -7,6 +7,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.0.0/jsencrypt.min.js"></script>
   </head>
   <body>
     <div class="container text-center mt-5">
@@ -113,19 +114,37 @@
           const password = document.getElementById("loginPassword").value;
           const errorDiv = document.getElementById("loginError");
 
-          const response = await fetch("http://localhost:5000/auth/login/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
-            credentials: "include",
-          });
+          try {
+            // Ambil public key dari server
+            const pubKeyResponse = await fetch(
+              "http://localhost:5000/auth/publicKey"
+            );
+            const publicKey = await pubKeyResponse.text();
 
-          const data = await response.json();
-          if (response.ok) {
-            localStorage.setItem("accessToken", data.token);
-            window.location.href = "dashboard.html";
-          } else {
-            errorDiv.textContent = data.message;
+            // Enkripsi password dengan RSA
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(publicKey);
+            encrypt.setKey(publicKey);
+            const encryptedPassword = encrypt.encrypt(password);
+
+            const response = await fetch("http://localhost:5000/auth/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username, password: encryptedPassword }), // Kirim password yang sudah dienkripsi
+              credentials: "include",
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+              localStorage.setItem("accessToken", data.token);
+              window.location.href = "dashboard.html";
+            } else {
+              errorDiv.textContent = data.message;
+              errorDiv.classList.remove("d-none");
+            }
+          } catch (error) {
+            console.error("Error saat login:", error);
+            errorDiv.textContent = "Terjadi kesalahan, coba lagi.";
             errorDiv.classList.remove("d-none");
           }
         });

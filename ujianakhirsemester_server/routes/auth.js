@@ -3,7 +3,34 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("../config/db");
 const router = express.Router();
+const NodeRSA = require("node-rsa");
+const fs = require("fs");
+const path = require("path");
 require("dotenv").config();
+
+// Generate atau load kunci RSA
+const privateKeyPath = path.join(__dirname, "../config/private.pem");
+const publicKeyPath = path.join(__dirname, "../config/public.pem");
+
+let privateKey, publicKey;
+
+if (!fs.existsSync(privateKeyPath) || !fs.existsSync(publicKeyPath)) {
+  const key = new NodeRSA({ b: 2048 });
+  privateKey = key.exportKey("private");
+  publicKey = key.exportKey("public");
+
+  // Simpan ke file
+  fs.writeFileSync(privateKeyPath, privateKey);
+  fs.writeFileSync(publicKeyPath, publicKey);
+} else {
+  privateKey = fs.readFileSync(privateKeyPath, "utf8");
+  publicKey = fs.readFileSync(publicKeyPath, "utf8");
+}
+
+// **Route untuk mengirim public key ke frontend**
+router.get("/publicKey", (req, res) => {
+  res.send(publicKey);
+});
 
 // **Registrasi User**
 router.post("/register", async (req, res) => {
@@ -23,34 +50,45 @@ router.post("/register", async (req, res) => {
   );
 });
 
-// **Login User**
+// **Login User dengan Dekripsi RSA**
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
-  db.query(
-    "SELECT * FROM users WHERE username = ?",
-    [username],
-    async (err, result) => {
-      if (err) return res.status(500).json({ message: "Server error" });
+  try {
+    const key = new NodeRSA(privateKey, "pkcs1-private", {
+      encryptionScheme: "pkcs1",
+    });
+    const decryptedPassword = key.decrypt(password, "utf8");
 
-      if (result.length === 0)
-        return res.status(401).json({ message: "User tidak ditemukan" });
+    db.query(
+      "SELECT * FROM users WHERE username = ?",
+      [username],
+      async (err, result) => {
+        if (err) return res.status(500).json({ message: "Server error" });
 
-      const user = result[0];
-      const isMatch = await bcrypt.compare(password, user.password);
+        if (result.length === 0)
+          return res.status(401).json({ message: "User tidak ditemukan" });
 
-      if (!isMatch) return res.status(401).json({ message: "Password salah" });
+        const user = result[0];
+        const isMatch = await bcrypt.compare(decryptedPassword, user.password);
 
-      // Buat token
-      const secretKey = "secret123";
-      const token = jwt.sign({ username: user.username }, secretKey, {
-        expiresIn: "1h",
-      });
-      res
-        .cookie("token", token, { httpOnly: true })
-        .json({ message: "Login berhasil", token });
-    }
-  );
+        if (!isMatch)
+          return res.status(401).json({ message: "Password salah" });
+
+        const token = jwt.sign(
+          { username: user.username },
+          process.env.JWT_SECRET,
+          { expiresIn: "1h" }
+        );
+
+        res
+          .cookie("token", token, { httpOnly: true, secure: true })
+          .json({ message: "Login berhasil", token });
+      }
+    );
+  } catch (error) {
+    res.status(400).json({ message: "Gagal mendekripsi password" + error });
+  }
 });
 
 // **Cek Session**
