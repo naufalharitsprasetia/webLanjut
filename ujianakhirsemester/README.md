@@ -53,7 +53,7 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 
 6. **Jalankan index.html**
    - buka file index.html di folder /public/ , kemudian :
-   - klik kanan, open file with live server / open with browser
+   - klik kanan, open file with live server.
 
 ## Struktur Proyek
 ```plaintext
@@ -114,6 +114,9 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).
 
 ## NB : Jika Ada Error ketika aplikasi di jalankan
+- Pastikan Server (Node.js) nya sudah menyala dan berjalan ketika membuka aplikasi (index.html).
+- Pastikan Mysql nya juga sudah menyala ketika aplikasi berjalan.
+- pastikan file index.html berjalan diatas web server (live server) / localhost, bukan open browser biasa.
 1. jika ada pesan error, pahami pesan tersebut terlebih dahulu, kemudian cari solusi nya
 2. buka console , (inspect elemen, tab > console), perhatikan ada error atau tidak
 3. hubungi kami : 081220594202
