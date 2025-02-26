@@ -2,6 +2,8 @@
 
 Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** menggunakan **Node.js**, **MySQL**, dan **RSA**. Pengguna dapat login melalui **popup form**, di mana autentikasi dilakukan menggunakan **access token** dan **refresh token** untuk keamanan yang lebih baik.
 
+- Download ZIP file :  [FINAL PROJECT](https://github.com).
+
 ## **🛠️ Fitur**
 ✅ **OAuth2 Authentication** → Login menggunakan OAuth2 dengan **access token & refresh token**  
 ✅ **RSA Encryption** → Token ditandatangani dengan **RSA 2048-bit** untuk keamanan lebih tinggi  
@@ -13,7 +15,7 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 ## **📌 Teknologi yang Digunakan**
 - **Backend**: Node.js (Express.js)
 - **Database**: MySQL
-- **Enkripsi**: RSA (jsonwebtoken & crypto)
+- **Enkripsi**: RSA
 - **Frontend**: HTML, CSS, JavaScript (AJAX untuk popup form)
 
 ## **📥 Cara Instalasi**
@@ -31,7 +33,7 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 
 3. **Konfigurasi Database**
    - Buat database MySQL di phpmyadmin dengan nama **'uasweblanjut'**
-   - import database **'uasweblanjut.sql'** yang beradad di folder config 
+   - import database **'uasweblanjut.sql'** yang berada di folder config 
    
 4. **Buat File Konfigurasi .env Buat file .env di root proyek dan isi dengan:**
    (jika belum ada) , (sesuaikan dengan konfigutasi komputer masing2)
@@ -86,10 +88,15 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 
 ## 📜 API Endpoint
 | Method |	Endpoint	       | Deskripsi                                          |
+
 | POST   |	/auth/login	    | Login & dapatkan access token + refresh token      |
+
 | POST   |	/auth/register  | Daftar user baru                                   |
+
 | POST   |	/auth/logout	 | Logout dan hapus refreshtoken                      |   
+
 | GET    |	/auth/publicKey | mengirim public key ke frontend                    |
+
 | GET    |	/auth/session   | cek session                                        |
 
 ## ⚠️ Keamanan yang Diterapkan
@@ -101,14 +108,12 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 ## Pengujian
 - _Login Berhasil_: Gunakan kredensial valid → Access token & refresh token dikembalikan
 - _Login Gagal_: Gunakan kredensial salah → Respon error 401 Unauthorized
-- _Access Token Expired_: Coba akses endpoint dengan access token yang sudah kadaluarsa
-- _Refresh Token Expired_: Gunakan refresh token setelah lebih dari 7 hari → Harus login ulang
 - _Keamanan Input_: Uji input dengan karakter berbahaya untuk melihat apakah sistem aman dari serangan injeksi
 
 ## Kontribusi Tim
 - **Backend Developer**: NAUFAL HARITS PRASETIA
 - **Dokumentasi**: ALVIN ARYA PANGESTU
-- **Pengujian**: BOTH
+- **Pengujian**: Alvin & Naufal
 
 ## Lisensi
 Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).
@@ -116,7 +121,7 @@ Proyek ini dilisensikan di bawah [Lisensi MIT](../LICENSE).
 ## NB : Jika Ada Error ketika aplikasi di jalankan
 - Pastikan Server (Node.js) nya sudah menyala dan berjalan ketika membuka aplikasi (index.html).
 - Pastikan Mysql nya juga sudah menyala ketika aplikasi berjalan.
-- pastikan file index.html berjalan diatas web server (live server) / localhost, bukan open browser biasa.
-1. jika ada pesan error, pahami pesan tersebut terlebih dahulu, kemudian cari solusi nya
+- pastikan file index.html berjalan diatas web server (live server) / localhost, bukan open with browser biasa.
+1. jika ada pesan error, pahamsi pesan tersebut terlebih dahulu, kemudian cari solusi nya
 2. buka console , (inspect elemen, tab > console), perhatikan ada error atau tidak
 3. hubungi kami : 081220594202
