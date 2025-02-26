@@ -8,7 +8,6 @@ Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** men
 ✅ **OAuth2 Authentication** → Login menggunakan OAuth2 dengan **access token & refresh token**  
 ✅ **RSA Encryption** → Token ditandatangani dengan **RSA 2048-bit** untuk keamanan lebih tinggi  
 ✅ **Popup Form Login** → UI login responsif dalam bentuk popup modal  
-✅ **Refresh Token Mechanism** → Pengguna bisa mendapatkan access token baru tanpa perlu login ulang  
 ✅ **MySQL Database** → Menyimpan data pengguna dan token secara aman  
 ✅ **Input Validation & Sanitization** → Melindungi dari serangan **SQL Injection & XSS**  
 
