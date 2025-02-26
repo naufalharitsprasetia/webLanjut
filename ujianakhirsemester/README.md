@@ -2,7 +2,7 @@
 
 Proyek ini bertujuan untuk mengimplementasikan sistem autentikasi **OAuth2** menggunakan **Node.js**, **MySQL**, dan **RSA**. Pengguna dapat login melalui **popup form**, di mana autentikasi dilakukan menggunakan **access token** dan **refresh token** untuk keamanan yang lebih baik.
 
-- Download ZIP file :  [FINAL PROJECT](https://github.com).
+- Download ZIP file :  [FINAL PROJECT](https://raw.githubusercontent.com/naufalharitsprasetia/webLanjut/refs/heads/main/ujianakhirsemester.zip).
 
 ## **🛠️ Fitur**
 ✅ **OAuth2 Authentication** → Login menggunakan OAuth2 dengan **access token & refresh token**  
